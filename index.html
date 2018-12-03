@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Vue JS Slider" content="">
+    <meta name="Dani_Gamss" content="">
+
+    <title>Vue JS Slider</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- vue photo gallery styles-->
+    <link rel="stylesheet" type="text/css" href="vue_slider.css" />
+
+
+</head>
+
+<body>    
+
+    <div id="root">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center"><h2>A slider component built with vue.js</h2></div>
+            </div>
+        </div>
+
+        <master-comp inline-template>
+        <div id="master-container">
+            <div class="container">
+              <div class="row">
+                <div id="slides-container" :style="{'height': heightOfChildren}">
+                  <div class='single-slide'
+                  v-for='(item, index) in items'
+                  @mousedown="moveMouse(index)" 
+                  :key='index'
+                  :class="{'is-animating': isAnimating}"  
+                  :style="{'left': item.left}">
+                    <div class="col-md-8">
+                      <p class='name'>Name: {{ item.name }}</p>
+                      <p>Age: {{ item.age }}</p>
+                      <p>{{ item.text }}</p>
+                      <a :href="item.link">Read more</a>
+                    </div>
+                    <div class="col-md-4">
+                      <img :src="item.image" class='img-responsive' alt="">
+                    </div>
+                  </div>
+                </div>            
+              </div>
+            </div>
+            <div id="dots-container">
+            <div class="container">
+              <div class="row">
+                <div class='col-md-12 text-center'>
+                    <a class="dot" 
+                    href='#' 
+                    v-for='(item, index) in items' 
+                    :key='index'
+                    :class="{'active': checkIfActive(index)}"
+                    @click.prevent='moveToAnother(index)'></a>
+                </div>            
+              </div>
+            </div>
+            </div>     
+        </div>
+        </master-comp>     
+
+    </div>
+
+
+    <!-- vue core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.js"></script>
+    <!-- vue slider -->
+    <script src='master_comp.js'></script>
+    <script src="main-instance.js"></script>
+
+</body>
+
+</html>
